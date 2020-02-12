@@ -1,0 +1,19 @@
+{
+  "name": "user_service",
+  "version": "1.0.0",
+  "description": "Microservice that handles User related requests",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "\u0016https://github.com/AndyTon/PortailEtudiant"
+  },
+  "keywords": [
+    "login",
+    "register"
+  ],
+  "author": "Andy Ton-That",
+  "license": "ISC"
+}
