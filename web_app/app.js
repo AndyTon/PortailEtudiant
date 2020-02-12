@@ -1,9 +1,9 @@
-const express = require('express');
+var express = require('express');
 
-const app = express();
+var app = express();
 app.set('view engine', 'ejs');
 
-const port = 1000;
+var port = 1000;
 
 app.get('/', (req,res) => {
     res.render('register');
