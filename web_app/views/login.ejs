@@ -2,12 +2,28 @@
 <html>
   <div class="login-wrap">
     <h2>Login</h2>
+    <h3>This is my test: <div id="test">ME!</div></h3>
 
     <div class="form">
       <input type="text" placeholder="Username" name="un" />
       <input type="password" placeholder="Password" name="pw" />
-      <button>Sign in</button>
+      <button onclick="onLoginClick()">Sign in</button>
       <a href="/"> <p>Don't have an account? Register</p></a>
     </div>
   </div>
+
+  <script>
+      function onLoginClick(){
+          const url = "http://localhost:2000/user/login";
+
+          fetch(url)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                document.getElementById('test').innerHTML = data.thisIsMyKey;
+                console.log(data.thisIsMyKey);
+            });
+      }
+  </script>
 </html>
