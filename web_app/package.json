@@ -11,5 +11,8 @@
     "url": "\u0016https://github.com/AndyTon/PortailEtudiant"
   },
   "author": "Andy Ton-That",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
