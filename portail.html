@@ -1,0 +1,76 @@
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+
+    <title>Portail Étudiant</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>S'inscrire</h1>
+      <div class="row">
+        <form class="col s6" id="myForm" novalidate>
+          <div class="row">
+            <div class="input-field col s6">
+                <label for="lastName">Nom</label>
+                <input type="text" name="Nom" id="lastName" onfocusout="validateLastName()"/>
+                <span class="helper-text"></span>
+            </div> 
+            <div class="input-field col s6">
+                <label for="firstName">Prénom</label>
+                <input type="text" name="Prénom" id="firstName" onfocusout="validateFirstName()"/>
+                <span class="helper-text"></span>
+            </div>                     
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+              <label for="password">Mot de passe</label>
+              <input type="password" name="Mot de passe" id="password" onfocusout="validatePassword()"/>
+              <span class="helper-text"></span>
+          </div>
+            <div class="input-field col s6">
+                <label for="confirmPassword">Confirmez le mot de passe</label>
+                <input type="password" name="Confirmez le mot de passe" id="confirmPassword" onfocusout="validateConfirmPassword()"/>
+                <span class="helper-text"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+                <label for="email">Adresse courriel</label>
+                <input type="email" name="Adresse courriel" id="email" onfocusout="validateEmail()"/>
+                <span class="helper-text"></span>
+            </div> 
+          </div>
+          <div class = "row">              
+              <div class="input-field col s12">
+                <select id="select">
+                  <option value = "" disabled selected>sélectionner une option</option>
+                  <option value = "1">Enseignant</option>
+                  <option value = "2">Étudiant</option>
+               </select>
+               <label>Lien avec l'École</label>
+              </div>                    
+        </div>
+          <button class="btn waves-effect waves-light" type="submit">
+            Soumettre
+          </button>
+        </form>
+        <div class="col s6">
+          <img src="./images/img.jpg" style="width: 100%;border-radius: 6px;opacity: 0.85;">
+      </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./script/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems);
+        });
+    </script>
+  s</body>
+</html>
