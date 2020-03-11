@@ -1,0 +1,28 @@
+#banner{
+    position:block;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    background-color: #6ccc6e;
+}
+
+#bannerText{
+    padding: 10px;
+    color: azure;
+}
+
+body {
+    position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+}

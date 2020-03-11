@@ -1,18 +1,17 @@
-const firstName = document.getElementById('firstName');
-const lastName = document.getElementById('lastName');
-const password = document.getElementById('password');
-const confirmPassword = document.getElementById('confirmPassword');
-const email = document.getElementById('email');
-
+const firstName = document.getElementById("firstName");
+const lastName = document.getElementById("lastName");
+const password = document.getElementById("password");
+const confirmPassword = document.getElementById("confirmPassword");
+const email = document.getElementById("email");
 
 // Form
-const form = document.getElementById('myForm');
+const form = document.getElementById("myForm");
 // colors
-const green = '#4CAF50';
-const red = '#F44336';
+const green = "#4CAF50";
+const red = "#F44336";
 
 //confirmation msg
-form.addEventListener('submit', function(event) {
+form.addEventListener("submit", function(event) {
   event.preventDefault();
   if (
     validateFirstName() &&
@@ -22,19 +21,19 @@ form.addEventListener('submit', function(event) {
     validateEmail()
   ) {
     const name = firstName.value;
-    const container = document.querySelector('div.container');
-    const loader = document.createElement('div');
-    loader.className = 'progress';
-    const loadingBar = document.createElement('div');
-    loadingBar.className = 'indeterminate';
+    const container = document.querySelector("div.container");
+    const loader = document.createElement("div");
+    loader.className = "progress";
+    const loadingBar = document.createElement("div");
+    loadingBar.className = "indeterminate";
     loader.appendChild(loadingBar);
     container.appendChild(loader);
     setTimeout(function() {
-      const loaderDiv = document.querySelector('div.progress');
-      const panel = document.createElement('div');
-      panel.className = 'card-panel green';
-      const text = document.createElement('span');
-      text.className = 'white-text';
+      const loaderDiv = document.querySelector("div.progress");
+      const panel = document.createElement("div");
+      panel.className = "card-panel green";
+      const text = document.createElement("span");
+      text.className = "white-text";
       text.appendChild(
         document.createTextNode(
           `Inscription réussie, bienvenue sur le protail étudiant ${name}`
@@ -65,12 +64,12 @@ function validatePassword() {
   return true;
 }
 function validateConfirmPassword() {
-  if (password.className !== 'valid') {
-    setInvalid(confirmPassword, 'Le mot de passe doit être valide');
+  if (password.className !== "valid") {
+    setInvalid(confirmPassword, "Le mot de passe doit être valide");
     return;
   }
   if (password.value !== confirmPassword.value) {
-    setInvalid(confirmPassword, 'les mots de passe doivent correspondre');
+    setInvalid(confirmPassword, "les mots de passe doivent correspondre");
     return;
   } else {
     setValid(confirmPassword);
@@ -92,17 +91,17 @@ function checkIfEmpty(field) {
   }
 }
 function isEmpty(value) {
-  if (value === '') return true;
+  if (value === "") return true;
   return false;
 }
 function setInvalid(field, message) {
-  field.className = 'invalid';
+  field.className = "invalid";
   field.nextElementSibling.innerHTML = message;
   field.nextElementSibling.style.color = red;
 }
 function setValid(field) {
-  field.className = 'valid';
-  field.nextElementSibling.innerHTML = '';
+  field.className = "valid";
+  field.nextElementSibling.innerHTML = "";
 }
 function checkIfOnlyLetters(field) {
   if (/^[a-zA-Z ]+$/.test(field.value)) {
@@ -136,20 +135,20 @@ function containsCharacters(field, code) {
   switch (code) {
     case 1:
       regEx = /(?=.*[a-zA-Z])/;
-      return matchWithRegEx(regEx, field, 'Doit contenir au moins une lettre');
+      return matchWithRegEx(regEx, field, "Doit contenir au moins une lettre");
     case 2:
       regEx = /(?=.*\d)(?=.*[a-zA-Z])/;
       return matchWithRegEx(
         regEx,
         field,
-        'Doit contenir au moins une lettre et un chiffre'
+        "Doit contenir au moins une lettre et un chiffre"
       );
     case 3:
       regEx = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
       return matchWithRegEx(
         regEx,
         field,
-        'Doit contenir au moins une majuscule, une lettre minuscule et un chiffre'
+        "Doit contenir au moins une majuscule, une lettre minuscule et un chiffre"
       );
     case 4:
       // uppercase, lowercase, number and special char
@@ -157,12 +156,16 @@ function containsCharacters(field, code) {
       return matchWithRegEx(
         regEx,
         field,
-        'Doit contenir au moins une majuscule, une lettre minuscule, un chiffre et un caractère spécial'
+        "Doit contenir au moins une majuscule, une lettre minuscule, un chiffre et un caractère spécial"
       );
     case 5:
       // Email pattern
       regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return matchWithRegEx(regEx, field, 'l adresse courriel doit être une adresse valide');
+      return matchWithRegEx(
+        regEx,
+        field,
+        "l adresse courriel doit être une adresse valide"
+      );
     default:
       return false;
   }
@@ -177,8 +180,7 @@ function matchWithRegEx(regEx, field, message) {
   }
 }
 
-function testme (){
+function toLoginPage() {
+  console.log("WORKWORKOWKEROWKEROWERK");
   window.location.href = "http://localhost:1000/login";
 }
-
-

@@ -1,29 +1,69 @@
 <!DOCTYPE html>
 <html>
-  <div class="login-wrap">
-    <h2>Login</h2>
-    <h3>This is my test: <div id="test">ME!</div></h3>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="./CSS/all.css" />
+    <link rel="stylesheet" type="text/css" href="./CSS/login.css" />
+    <title>Portail Étudiant</title>
+  </head>
 
-    <div class="form">
-      <input type="text" placeholder="Username" name="un" />
-      <input type="password" placeholder="Password" name="pw" />
-      <button onclick="onLoginClick()">Sign in</button>
-      <a href="/"> <p>Don't have an account? Register</p></a>
+  <body>
+    <div class="container">
+      <div class="" id="banner">
+        <h2 id="bannerText">Login</h2>
+      </div>
+      <div class="row">
+        <form class="col s6" id="myForm" novalidate>
+          <div class="row">
+            <div class="input-field col s12">
+              <label for="email">Adresse courriel</label>
+              <input
+                type="email"
+                name="Adresse courriel"
+                id="email"
+                onfocusout=""
+              />
+              <span class="helper-text"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <label for="email">Mot de passe</label>
+              <input
+                type="password"
+                name="Mot de passe"
+                id="password"
+                onfocusout=""
+              />
+              <span class="helper-text"></span>
+            </div>
+          </div>
+          <button class="btn waves-effect waves-light" type="submit" onclick="validate_login()">
+            Saisir
+          </button>
+          <button
+            class="btn waves-effect waves-light"
+            type="submit"
+            onclick="toRegisterPage()"
+            novalidate
+          >
+            Je n'ai pas de compte
+          </button>
+        </form>
+        <div class="col s6">
+          <img
+            src="./images/img.jpg"
+            style="width: 100%;border-radius: 6px;opacity: 0.85;"
+          />
+        </div>
+      </div>
     </div>
-  </div>
-
-  <script>
-      function onLoginClick(){
-          const url = "http://localhost:2000/user/login";
-
-          fetch(url)
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                document.getElementById('test').innerHTML = data.thisIsMyKey;
-                console.log(data.thisIsMyKey);
-            });
-      }
-  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="./javascript/login.js"></script>
+  </body>
 </html>
