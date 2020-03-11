@@ -4,7 +4,7 @@ var app = express();
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/ressources'));
 
-var port = 1000;
+var port = 2000;
 
 app.get('/', (req,res) => {
     res.render('register');
@@ -23,5 +23,5 @@ app.get('/accueil', (req,res)=> {
 });
 
 app.listen(port, () => {
-    console.log("Port 1000 working!");
+    console.log("Port 2000 working!");
 });
