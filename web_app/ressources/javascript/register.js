@@ -177,4 +177,8 @@ function matchWithRegEx(regEx, field, message) {
   }
 }
 
+function testme (){
+  window.location.href = "http://localhost:1000/login";
+}
+
 
