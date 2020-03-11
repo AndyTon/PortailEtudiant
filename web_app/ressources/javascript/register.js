@@ -181,6 +181,5 @@ function matchWithRegEx(regEx, field, message) {
 }
 
 function toLoginPage() {
-  console.log("WORKWORKOWKEROWKEROWERK");
-  window.location.href = "http://localhost:1000/login";
+  window.location.href = "http://localhost:2000/login";
 }

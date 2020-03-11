@@ -21,5 +21,5 @@ router.route('/login')
 app.use('/user', router);
 
 app.listen(port, () => {
-    console.log("Port 2000 working!");
+    console.log("Port 3000 working!");
 });

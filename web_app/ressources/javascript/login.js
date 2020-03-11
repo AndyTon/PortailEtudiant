@@ -5,10 +5,9 @@ form.addEventListener('submit', function(event) {
 });
 
 function toRegisterPage(){
-    console.log("works");
-    window.location.href = "http://localhost:1000/register";
+    window.location.href = "http://localhost:2000/register";
 }
 
 function validate_login(){
-    window.location.href = "http://localhost:1000/accueil";
+    window.location.href = "http://localhost:2000/accueil";
 }
