@@ -6,6 +6,8 @@ app.use(express.static(__dirname + '/ressources'));
 
 var port = 2000;
 
+app.locals.port = port;
+
 app.get('/', (req,res) => {
     res.render('register');
 });
@@ -23,5 +25,5 @@ app.get('/accueil', (req,res)=> {
 });
 
 app.listen(port, () => {
-    console.log("Port 2000 working!");
+    console.log("Port " + port + " working!");
 });

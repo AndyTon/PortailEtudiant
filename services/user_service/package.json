@@ -15,5 +15,8 @@
     "register"
   ],
   "author": "Andy Ton-That",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
