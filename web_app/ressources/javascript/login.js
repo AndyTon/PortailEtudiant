@@ -8,9 +8,14 @@ function toRegisterPage() {
     window.location.href = "http://localhost:2000/register";
 }
 
+const red = "#F44336";
+
 function validate_login() {
-    var user = document.getElementById('email').value;
-    var pw = document.getElementById('password').value;
+    var userElement = document.getElementById('email');
+    var user = userElement.value;
+
+    var pwElement = document.getElementById('password')
+    var pw = pwElement.value;
 
     fetch('http://localhost:3000/user/login', {
         method: 'GET',
@@ -19,14 +24,22 @@ function validate_login() {
             'pw': pw
         }
     })
-        .then((response) => response.json())
-        .then((result) => {
-            console.log('Success:', result);
+        .then((response) => {
+            if(!response.ok){
+                userElement.nextElementSibling.innerHTML = "Invalid Username or Password";
+                userElement.nextElementSibling.style.color = red;
+
+                pwElement.nextElementSibling.innerHTML = "Invalid Username or Password";
+                pwElement.nextElementSibling.style.color = red;
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then((result) =>{
+            window.location.href = "http://localhost:2000/accueil";
         })
         .catch((error) => {
             console.error('Error:', error);
         });
 
-
-    // window.location.href = "http://localhost:2000/accueil";
 }
