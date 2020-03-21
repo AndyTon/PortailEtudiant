@@ -42,7 +42,9 @@ form.addEventListener("submit", function(event) {
       panel.appendChild(text);
       container.replaceChild(panel, loaderDiv);
     }, 1000);
-  }
+
+    register();
+  } 
 });
 
 // Validators
@@ -182,4 +184,47 @@ function matchWithRegEx(regEx, field, message) {
 
 function toLoginPage() {
   window.location.href = "http://localhost:2000/login";
+}
+
+function register(){
+  var lastNameElement = document.getElementById('lastName');
+  var lastName = lastNameElement.value;
+
+  var firstnameElement = document.getElementById('firstName');
+  var firstName = firstnameElement.value;
+
+  var passwordElement = document.getElementById('password');
+  var password = passwordElement.value;
+
+  var emailElement = document.getElementById('email');
+  var email = emailElement.value;
+  
+  var selectElement = document.getElementById('select');
+  var role = selectElement.options[selectElement.selectedIndex].value;
+
+  fetch('http://localhost:3000/user/register', {
+    method: 'POST',
+    headers: {
+      'lastName': lastName,
+      'firstName': firstName,
+      'password': password,
+      'email': email,
+      'role': role
+    }
+  })
+    .then((response) => {
+      if(!response.ok){
+        // to do
+
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then((result) => {
+      window.location.href = "http://localhost:2000/accueil";
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    })
+
 }
