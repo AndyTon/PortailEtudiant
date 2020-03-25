@@ -214,8 +214,6 @@ function register(){
   })
     .then((response) => {
       if(!response.ok){
-        // to do
-
         throw new Error('Network response was not ok');
       }
       return response.json();

@@ -78,12 +78,18 @@ router.route('/register')
         email == null || role == null){
             res.status(400).send(incorrectHeaderMessage);
         } else {
-            registerService.validateRegister(lastName, firstName, password, email, role, function(result){
-
+                registerService.validateRegister(con, lastName, firstName, password, email, role, function(result, message){
+                    if(!result){
+                        res.status(403).send({message: message});
+                    } else {
+                        res.status(200).send({ThisIsMyKey: "test"});
+                    }
+                
             });
         }
 });
 
+// TO FINISH
 router.route('/certificate')
 .get(function(req,res){
     // Request handling
