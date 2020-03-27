@@ -51,18 +51,33 @@ router.route('/login')
     if(user == null || pw == null){
         res.status(400).send(incorrectHeaderMessage);
     } else {
-        loginService.validateLogin(user,pw, con, function(result){
-            // Response handling
-            if(result){
-                // certificate
-                res.status(200).send({ThisIsMyKey: "test"});
-            } else {
-                res.status(403).send();
-            }
-        });
+
+        try{
+            loginService.validateLogin(user,pw, con, function(result, user){
+                // Response handling
+                if(result){
+                    //handle role
+                    let role = "Étudiant";
+                    
+                    if(user.prof[0] == 1){
+                        role = "Enseignant";
+                    }
+                    
+                    res.status(200).send({'lastName': user.nom,
+                                            'firstName' : user.prenom,
+                                            'password': user.pw,
+                                            'email' : user.email,
+                                            'role': role});
+                } else {
+                    res.status(403).send();
+                }
+            });
+        } catch {
+            res.status(403).send();
+        }
+        
     }
 
-    
 });
 
 router.route('/register')
@@ -78,14 +93,23 @@ router.route('/register')
         email == null || role == null){
             res.status(400).send(incorrectHeaderMessage);
         } else {
-                registerService.validateRegister(con, lastName, firstName, password, email, role, function(result, message){
-                    if(!result){
-                        res.status(403).send({message: message});
-                    } else {
-                        res.status(200).send({ThisIsMyKey: "test"});
-                    }
+                try{
+                    registerService.validateRegister(con, lastName, firstName, password, email, role, function(result, message){
+                        if(!result){
+                            res.status(403).send({message: message});
+                        } else {
+                            res.status(200).send({'lastName': lastName,
+                                                    'firstName' : firstName,
+                                                    'password': password,
+                                                    'email' : email,
+                                                    'role': role});
+                        }
+                    
+                    });
+                } catch {
+                    res.status(403).send();
+                }
                 
-            });
         }
 });
 

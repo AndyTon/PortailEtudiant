@@ -36,6 +36,10 @@ function validate_login() {
             return response.json();
         })
         .then((result) =>{
+            document.cookie = "lastName="+result.lastName;
+            document.cookie = "firstName="+result.firstName;
+            document.cookie = "email="+result.email;
+            document.cookie = "role="+result.role;
             window.location.href = "http://localhost:2000/accueil";
         })
         .catch((error) => {

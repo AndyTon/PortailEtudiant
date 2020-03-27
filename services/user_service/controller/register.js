@@ -14,7 +14,15 @@ function validateRegister(con, lastName, firstName, password, email, role, callb
         }
 
         if(!hasSame){
-            con.query("INSERT INTO utilisateurs(nom, prenom, email, pw) VALUES(\"" + lastName + "\",\"" + firstName + "\",\"" + email + "\",\"" + password + "\")",
+
+            //deal with role
+            let roleTeacher = 0;
+
+            if(role == "Enseignant"){
+                roleTeacher = 1;
+            }
+
+            con.query("INSERT INTO utilisateurs(nom, prenom, email, pw, prof) VALUES(\"" + lastName + "\",\"" + firstName + "\",\"" + email + "\",\"" + password + "\"," + roleTeacher + ")",
                 function(err,result){
                     if(err) throw err;
 

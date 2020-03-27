@@ -200,7 +200,7 @@ function register(){
   var email = emailElement.value;
   
   var selectElement = document.getElementById('select');
-  var role = selectElement.options[selectElement.selectedIndex].value;
+  var role = selectElement[selectElement.selectedIndex].innerText;
 
   fetch('http://localhost:3000/user/register', {
     method: 'POST',
@@ -219,6 +219,10 @@ function register(){
       return response.json();
     })
     .then((result) => {
+      document.cookie = "lastName="+result.lastName;
+      document.cookie = "firstName="+result.firstName;
+      document.cookie = "email="+result.email;
+      document.cookie = "role="+result.role;
       window.location.href = "http://localhost:2000/accueil";
     })
     .catch((error) => {
