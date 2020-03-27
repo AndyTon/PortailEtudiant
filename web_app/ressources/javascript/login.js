@@ -40,7 +40,13 @@ function validate_login() {
             document.cookie = "firstName="+result.firstName;
             document.cookie = "email="+result.email;
             document.cookie = "role="+result.role;
-            window.location.href = "http://localhost:2000/accueil";
+
+            if(result.role == 'Étudiant'){
+                window.location.href = "http://localhost:2000/accueilEtudiant";
+            } else if(result.role == 'Enseignant'){
+                window.location.href = "http://localhost:2000/accueilProf";
+            }
+            
         })
         .catch((error) => {
             console.error('Error:', error);
