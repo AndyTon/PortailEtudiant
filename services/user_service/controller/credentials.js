@@ -6,7 +6,17 @@
 // role is a String. ex: "Étudiant" or "Enseignant"
 
 function validateCredentials(lastName, firstName, email, role, con, callback){
-    return callback(true);
+    let sql = "select * from utilisateurs where adresse_email = '"+email+"'";
+
+    con.query(sql, (err,resultat) => {
+        if(err) throw err;
+        
+        if(resultat[0].prenom==firstName&&resultat[0].nom==lastName&&resultat[0].prof==role){
+           return true;
+        }else{
+            return false
+        }
+    }
 }
 
 exports.validateCredentials = validateCredentials;
