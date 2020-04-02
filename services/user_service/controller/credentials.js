@@ -5,8 +5,19 @@
 // email is a String. ex: "test@test.ca"
 // role is a String. ex: "Étudiant" or "Enseignant"
 
-function validateCredentials(lastName, firstName, email, role, con, callback){
-    return callback(true);
+function validateCredentials(lastName, firstName, email, role, con, callback) {
+    let sql = "select * from utilisateurs where email = '" + email + "'";
+
+    con.query(sql, (err, resultat) => {
+        if (err) throw err;
+        console.log(resultat);
+
+        if (resultat[0].prenom == firstName && resultat[0].nom == lastName && resultat[0].prof == role) {
+            return callback(true);
+        } else {
+            return callback(false);
+        }
+    });
 }
 
 exports.validateCredentials = validateCredentials;

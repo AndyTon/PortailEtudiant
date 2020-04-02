@@ -12,7 +12,7 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "123",
+    password: "",
     database: "portailetudiant"
   });
   
@@ -114,6 +114,22 @@ router.route('/register')
 });
 
 // TO FINISH
+router.route('/checkCredentials')
+.get(function(req,res){
+    let lastName = req.header('lastName');
+    let firstName = req.header('firstName');
+    let email = req.header('email');
+    let role = req.header('role');
+
+    credentialsService.validateCredentials(lastName, firstName, email, role, con, function(result){
+        if(result){
+            res.status(200).send();
+        } else {
+            res.status(403).send();
+        }
+    });
+});
+
 router.route('/checkCredentials')
 .get(function(req,res){
     let lastName = req.header('lastName');
