@@ -1,3 +1,7 @@
+var generalRoutes = require('./Routes/General/GeneralRoutes');
+var enseignantRoutes = require('./Routes/Enseignant/EnseignantRoutes');
+var etudiantRoutes = require('./Routes/Étudiant/EtudiantRoutes');
+
 var express = require('express');
 
 var app = express();
@@ -8,25 +12,14 @@ var port = 2000;
 
 app.locals.port = port;
 
-app.get('/', (req,res) => {
-    res.render('register');
-});
+//General Routes
+generalRoutes.route(app);
 
-app.get('/register', (req,res) => {
-    res.render('register');
-});
+//Routes for Enseignant
+enseignantRoutes.route(app);
 
-app.get('/login', (req,res)=> {
-    res.render('login');
-});
-
-app.get('/accueilProf', (req,res)=> {
-    res.render('accueilProf');
-});
-
-app.get('/accueilEtudiant', (req,res)=> {
-    res.render('accueilEtudiant');
-});
+//Routes for Étudiant
+etudiantRoutes.route(app);
 
 app.listen(port, () => {
     console.log("Port " + port + " working!");
