@@ -13,6 +13,11 @@ function checkForCredentials(){
             'role': getRoleFromCookies()
         }
     })
+    .then((response) => {
+        if(!response.ok){
+            window.location.href = "http://localhost:2000/accueilEtudiant";
+        }
+    })
 }
 
 function getLastNameFromCookies(){
@@ -70,3 +75,6 @@ function changeMainTitle() {
     document.getElementById('bannerText').innerText = "Bienvenue " + firstName + " " + lastName;
 }
 
+function toAccueil(){
+    window.location.href = "http://localhost:2000/accueilProf";
+}

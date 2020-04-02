@@ -1,6 +1,6 @@
 var loginService = require('./controller/login');
 var registerService = require('./controller/register');
-var certificateService = require('./controller/certificate');
+var credentialsService = require('./controller/credentials');
 var express    = require('express');
 
 var app        = express();
@@ -77,7 +77,7 @@ router.route('/login')
         }
         
     }
-
+    
 });
 
 router.route('/register')
@@ -114,17 +114,21 @@ router.route('/register')
 });
 
 // TO FINISH
-router.route('/certificate')
+router.route('/checkCredentials')
 .get(function(req,res){
-    // Request handling
-    var certificate = req.header('certificate');
-    
-    if(certificate == null){
-        res.status(400).send(incorrectHeaderMessage);
-    } else {
-        certificateService.validateCertificate();
-    }
-})
+    let lastName = req.header('lastName');
+    let firstName = req.header('firstName');
+    let email = req.header('email');
+    let role = req.header('role');
+
+    credentialsService.validateCredentials(lastName, firstName, email, role, con, function(result){
+        if(result){
+            res.status(200).send();
+        } else {
+            res.status(403).send();
+        }
+    });
+});
 
 app.use('/user', router);
 
