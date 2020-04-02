@@ -93,6 +93,6 @@ function changeMainTitle() {
     document.getElementById('bannerText').innerText = "Bienvenue " + firstName + " " + lastName;
 }
 
-function toAccueil(){
-    window.location.href = "http://localhost:2000/accueilProf";
+function toVoirEleves(){
+    window.location.href = "http://localhost:2000/voirEleves";
 }

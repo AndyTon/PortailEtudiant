@@ -1,6 +1,7 @@
 var loginService = require('./controller/login');
 var registerService = require('./controller/register');
 var credentialsService = require('./controller/credentials');
+var studentService = require('./controller/student');
 var express    = require('express');
 
 var app        = express();
@@ -141,6 +142,28 @@ router.route('/checkCredentials')
         });
     }
     
+});
+
+router.route('/getStudents')
+.get(function(req,res){
+    let lastName = req.header('lastName');
+    let firstName = req.header('firstName');
+    let email = req.header('email');
+    let role = req.header('role');
+
+    if(lastName == null || firstName == null || email == null || role == null){
+        res.status(400).send(incorrectHeaderMessage);
+    } else {
+        credentialsService.validateCredentials(lastName, firstName, email, role, con, function(result){
+            if(result){
+                studentService.getAllStudents(con, function(result){
+                    res.status(200).send(result);
+                })
+            } else {
+                res.status(403).send();
+            }
+        });
+    }
 });
 
 app.use('/user', router);

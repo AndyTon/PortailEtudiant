@@ -6,7 +6,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <script type="text/javascript" src="./javascript/accueilProf.js"></script>
+    <script type="text/javascript" src="./javascript/Enseignant/voirEleves.js"></script>
     <script type="text/javascript" src="./javascript/accueil.js"></script>
     <link rel="stylesheet" type="text/css" href="./CSS/all.css" />
     <link rel="stylesheet" type="text/css" href="./CSS/accueil/accueilProf.css" />
@@ -23,19 +23,16 @@
           Logout
         </div>
       </div>
-      <div class="row">
-        Que voulez-vous faire?
-      </div>
-      <div class="row">
-        <div class="box-button" onclick="toVoirEleves()">
-          1. Voir mes élèves
-        </div>
-        <div class="box-button">
-          2. Créer un exercice
-        </div>
-        <div class="box-button">
-          3. Corriger un exercice
-        </div>
+      <h5>
+          Liste des étudiants
+      </h5>
+      <table id='studentsTable'>
+          <tr>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Adresse Courriel</th>
+          </tr>
+      </table>
       </div>
     </div>
   </body>
