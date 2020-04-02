@@ -1,6 +1,14 @@
 function onPageLoad(){
-    checkForCredentials();
-    changeMainTitle();
+    checkForCookies();
+}
+
+function checkForCookies(){
+    if(document.cookie != ""){
+        checkForCredentials();
+        changeMainTitle();
+    } else {
+        window.location.href = "http://localhost:2000/login";
+    }
 }
 
 function checkForCredentials(){
@@ -15,9 +23,19 @@ function checkForCredentials(){
     })
     .then((response) => {
         if(!response.ok){
-            window.location.href = "http://localhost:2000/accueilEtudiant";
+            return response.json();
         }
     })
+    .then((result) => {
+        document.cookie = "lastName="+result.lastName;
+        document.cookie = "firstName="+result.firstName;
+        document.cookie = "email="+result.email;
+        document.cookie = "role="+result.role;
+
+        if(result.role == "Étudiant"){
+            window.location.href = "http://localhost:2000/accueilEtudiant";
+        }
+    });
 }
 
 function getLastNameFromCookies(){

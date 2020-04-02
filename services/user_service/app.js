@@ -12,7 +12,7 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "",
+    password: "123",
     database: "portailetudiant"
   });
   
@@ -113,7 +113,6 @@ router.route('/register')
         }
 });
 
-// TO FINISH
 router.route('/checkCredentials')
 .get(function(req,res){
     let lastName = req.header('lastName');
@@ -121,29 +120,27 @@ router.route('/checkCredentials')
     let email = req.header('email');
     let role = req.header('role');
 
-    credentialsService.validateCredentials(lastName, firstName, email, role, con, function(result){
-        if(result){
-            res.status(200).send();
-        } else {
-            res.status(403).send();
-        }
-    });
-});
+    if(lastName == null || firstName == null || email == null || role == null){
+        res.status(400).send(incorrectHeaderMessage);
+    } else {
+        credentialsService.validateCredentials(lastName, firstName, email, role, con, function(result, account){
+            if(result){
+                res.status(200).send();
+            } else {
+                
+                let profString = "Étudiant";
+                if(account.prof[0] == 1){
+                    profString = "Enseignant";
+                }
 
-router.route('/checkCredentials')
-.get(function(req,res){
-    let lastName = req.header('lastName');
-    let firstName = req.header('firstName');
-    let email = req.header('email');
-    let role = req.header('role');
-
-    credentialsService.validateCredentials(lastName, firstName, email, role, con, function(result){
-        if(result){
-            res.status(200).send();
-        } else {
-            res.status(403).send();
-        }
-    });
+                res.status(403).send({'lastName': account.nom,
+                                    'firstName' : account.prenom,
+                                    'email' : account.email,
+                                    'role': profString});
+            }
+        });
+    }
+    
 });
 
 app.use('/user', router);

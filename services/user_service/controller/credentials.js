@@ -10,12 +10,18 @@ function validateCredentials(lastName, firstName, email, role, con, callback) {
 
     con.query(sql, (err, resultat) => {
         if (err) throw err;
-        console.log(resultat);
 
-        if (resultat[0].prenom == firstName && resultat[0].nom == lastName && resultat[0].prof == role) {
+        //deal with role
+        let roleTeacher = 0;
+
+        if(role == "Enseignant"){
+            roleTeacher = 1;
+        }
+
+        if (resultat[0].prenom == firstName && resultat[0].nom == lastName && resultat[0].prof[0] == roleTeacher) {
             return callback(true);
         } else {
-            return callback(false);
+            return callback(false, resultat[0]);
         }
     });
 }
