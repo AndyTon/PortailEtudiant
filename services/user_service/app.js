@@ -2,6 +2,8 @@ var loginService = require('./controller/login');
 var registerService = require('./controller/register');
 var certificateService = require('./controller/certificate');
 var credentialsService = require('./controller/credentials');
+var forgotpwService = require('./controller/forgotpw');
+var resetService = require('./controller/reset');
 var express    = require('express');
 
 var app        = express();
@@ -16,6 +18,7 @@ var con = mysql.createConnection({
     password: "",
     database: "portailetudiant"
   });
+  
   
   con.connect(function(err) {
     if (err) throw err;
@@ -141,6 +144,79 @@ router.route('/checkCredentials')
             res.status(403).send();
         }
     });
+});
+
+router.route('/Forgotpw')
+.get(function(req,res){
+    // Request handling
+    
+    let user = req.header('user');
+    let secretQ = req.header('secretQ');
+
+    if(user == null || pw == null){
+        res.status(400).send(incorrectHeaderMessage);
+    } else {
+
+        try{
+            forgotpwService.validateAdressWSQ(user,secretQ, con, function(result, user){
+                // Response handling
+                if(result){
+                    //handle role
+                    let role = "Étudiant";
+                    
+                    if(user.prof[0] == 1){
+                        role = "Enseignant";
+                    }
+                    
+                    res.status(200).send({'lastName': user.nom,
+                                            'firstName' : user.prenom,
+                                            'password': user.pw,
+                                            'email' : user.email,
+                                            'secretQ' : user.secretQ,
+                                            'role': role});
+                } else {
+                    res.status(403).send();
+                }
+            });
+        } catch {
+            res.status(403).send();
+        }
+        
+    }
+
+});
+
+router.route('/reset')
+.patch(function(req,res){
+    // Request handling
+    let user = req.header('user');
+    let newPw = req.header('newPw');
+    let confirmPw = req.header('confirmPw');
+    
+
+    if(user == null || newPw == null || confirmPw == null
+       ){
+            res.status(400).send(incorrectHeaderMessage);
+        } else {
+                try{
+                    resetService.validateresetPw(user,newPw,confirmPw, con, function(result, message){
+                        if(!result){
+                            res.status(403).send({message: message});
+                        } else {
+                            res.status(200).send({'lastName': lastName,
+                                                    'firstName' : firstName,
+                                                    'password': password,
+                                                    'email' : email,
+                                                    'secretQ' : user.secretQ,
+                                                    'role': role});
+                        }
+                    
+                    });
+                } catch {
+                    res.status(403).send();
+                }
+                
+        }
 });
 
 app.use('/user', router);
