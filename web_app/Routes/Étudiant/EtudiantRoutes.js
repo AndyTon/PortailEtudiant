@@ -1,6 +1,6 @@
 function route(app) {
   app.get("/accueilEtudiant", (req, res) => {
-    res.render("accueilEtudiant");
+    res.render("Etudiant/accueilEtudiant");
   });
 }
 

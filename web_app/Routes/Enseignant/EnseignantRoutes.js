@@ -1,6 +1,6 @@
 function route(app){
     app.get('/accueilProf', (req,res)=> {
-        res.render('accueilProf');
+        res.render('Enseignant/accueilProf');
     });
 }
 
