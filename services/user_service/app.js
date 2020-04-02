@@ -19,7 +19,7 @@ var con = mysql.createConnection({
     database: "portailetudiant"
   });
   
-  
+
   con.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
@@ -207,7 +207,7 @@ router.route('/reset')
                                                     'firstName' : firstName,
                                                     'password': password,
                                                     'email' : email,
-                                                    'secretQ' : user.secretQ,
+                                                    'secretQ' : secretQ,
                                                     'role': role});
                         }
                     
