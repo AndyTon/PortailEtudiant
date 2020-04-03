@@ -2,7 +2,7 @@
     cursor: pointer;
 }
 
-.box-button{
+.boxButton{
     cursor: pointer;
     background-color: lightgray;
     margin: 10px;
@@ -12,6 +12,6 @@
     border-style: solid;
 }
 
-.box-button:hover{
+.boxButton:hover{
     background-color: gray;
 }

@@ -4,37 +4,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
     />
-    <script type="text/javascript" src="./javascript/accueilProf.js"></script>
+    <script
+      type="text/javascript"
+      src="./javascript/Enseignant/accueilProf.js"
+    ></script>
     <script type="text/javascript" src="./javascript/accueil.js"></script>
     <link rel="stylesheet" type="text/css" href="./CSS/all.css" />
-    <link rel="stylesheet" type="text/css" href="./CSS/accueil/accueilProf.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./CSS/accueil/Enseignant/accueilProf.css"
+    />
     <link rel="stylesheet" type="text/css" href="./CSS/accueil/accueil.css" />
     <title>Portail Étudiant</title>
   </head>
   <body onload="onPageLoad()">
+    <div class="" id="banner">
+      <h2 id="bannerText" onclick="toAccueil()">Accueil</h2>
+    </div>
     <div class="container">
-      <div class="" id="banner">
-        <h2 id="bannerText" onclick="toAccueil()">Accueil</h2>
-      </div>
-      <div>
-        <div onclick="logout()">
-          Logout
+      <div class="col-sm-12">
+        <div class="row">
+          <button onclick="logout()" style="float: right;">
+            Logout
+          </button>
         </div>
-      </div>
-      <div class="row">
-        Que voulez-vous faire?
-      </div>
-      <div class="row">
-        <div class="box-button" onclick="toVoirEleves()">
-          1. Voir mes élèves
+
+        <div class="row">
+          Que voulez-vous faire?
         </div>
-        <div class="box-button">
-          2. Créer un exercice
-        </div>
-        <div class="box-button">
-          3. Corriger un exercice
+
+        <div class="row">
+          <div class="boxButton col-sm" onclick="toVoirEleves()">
+            1. Voir mes élèves
+          </div>
+          <div class="boxButton col-sm" onclick="toCreerExercice()">
+            2. Créer un exercice
+          </div>
+          <div class="boxButton col-sm">
+            3. Corriger un exercice
+          </div>
         </div>
       </div>
     </div>

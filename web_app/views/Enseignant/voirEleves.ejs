@@ -2,10 +2,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script type="text/javascript" src="./javascript/Enseignant/voirEleves.js"></script>
     <script type="text/javascript" src="./javascript/accueil.js"></script>
     <link rel="stylesheet" type="text/css" href="./CSS/all.css" />
@@ -14,18 +11,25 @@
     <title>Portail Étudiant</title>
   </head>
   <body onload="onPageLoad()">
+    
+    <div class="" id="banner">
+      <h2 id="bannerText" onclick="toAccueil()">Voir mes élèves</h2>
+    </div>
+    
     <div class="container">
-      <div class="" id="banner">
-        <h2 id="bannerText" onclick="toAccueil()">Accueil</h2>
-      </div>
-      <div>
-        <div onclick="logout()">
+      <div class="row">
+        <button onclick="back()" style="float:left;">
+          Back
+        </button>
+        <button onclick="logout()" style="float:right;">
           Logout
-        </div>
+        </button>
       </div>
-      <h5>
+
+      <h5 class="row">
           Liste des étudiants
       </h5>
+
       <table id='studentsTable'>
           <tr>
               <th>Nom</th>

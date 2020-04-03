@@ -1,0 +1,88 @@
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      type="text/javascript"
+      src="./javascript/Enseignant/CreerExercice.js"
+    ></script>
+    <script type="text/javascript" src="./javascript/accueil.js"></script>
+    <link rel="stylesheet" type="text/css" href="./CSS/all.css" />
+    <link rel="stylesheet" type="text/css" href="./CSS/accueil/accueil.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./CSS/Enseignant/CreerExercice.css"
+    />
+  </head>
+  <body onload="onPageLoad()">
+    <div class="" id="banner">
+      <h2 id="bannerText" onclick="toAccueil()">Créer un exercice</h2>
+    </div>
+    <div class="container">
+      <div class="row">
+        <button onclick="back()" type="button" class="btn btn-success">
+          Back
+        </button>
+        <button onclick="logout()" type="button" class="btn btn-secondary">
+          Logout
+        </button>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4">
+          <h5>Élèves</h5>
+          <table id="studentTable">
+            <tr>
+              <th>Étudiant</th>
+            </tr>
+          </table>
+        </div>
+
+        <div class="col-sm-4 middle_col">
+          <h5>Énoncé</h5>
+          <div class="form-group">
+            <div id="enonce" contenteditable="true">
+                this is my text
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <h5>Questions</h5>
+
+          <div id="questionSection">
+          </div>
+
+          <div style="padding-top: 20px;">
+            <select id="questionType" class="form-control">
+              <option>Question à courte réponse</option>
+              <option>Question à développement</option>
+            </select>
+
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="AddQuestion()"
+            >
+              Ajouter question
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <button onclick="" type="button" class="btn btn-success">
+            Sauvegarder
+          </button>
+      </div>
+
+    </div>
+  </body>
+</html>

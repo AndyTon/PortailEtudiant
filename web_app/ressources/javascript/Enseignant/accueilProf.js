@@ -96,3 +96,7 @@ function changeMainTitle() {
 function toVoirEleves(){
     window.location.href = "http://localhost:2000/voirEleves";
 }
+
+function toCreerExercice(){
+    window.location.href = "http://localhost:2000/CreerExercice";
+}
