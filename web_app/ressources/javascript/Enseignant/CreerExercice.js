@@ -19,7 +19,7 @@ function populateStudents(){
         }
     }).then((result) =>{
         for(let i=0; i<result.length; i++){
-            insertRow(table, result[i].nom, result[i].prenom);
+            insertRow(table, result[i].id, result[i].nom, result[i].prenom);
         }
     });
 }
@@ -64,14 +64,16 @@ function getRoleFromCookies(){
     }
 }
 
-function insertRow(table, nom, prenom){
+function insertRow(table, id, nom, prenom){
     var row = table.insertRow(table.rows.length);
 
     var cell0 = row.insertCell(0);
+    var cell1 = row.insertCell(1);
 
     let textToBeInserted = `${nom}, ${prenom}`;
 
-    cell0.innerHTML = textToBeInserted;
+    cell0.innerHTML = id;
+    cell1.innerHTML = textToBeInserted;
 }
 
 function AddQuestion(){
