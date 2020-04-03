@@ -153,7 +153,7 @@ router.route('/Forgotpw')
     let user = req.header('user');
     let secretQ = req.header('secretQ');
 
-    if(user == null || pw == null){
+    if(user == null || secretQ == null){
         res.status(400).send(incorrectHeaderMessage);
     } else {
 
