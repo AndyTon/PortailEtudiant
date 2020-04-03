@@ -108,3 +108,31 @@ function AddQuestion(){
     questionSection.appendChild(div);
 
 }
+
+function save(){
+    var table = document.getElementById('studentTable');
+
+    //get all IDs
+    let ids = [];
+    for(let i=1; i<table.rows.length; i++){
+        ids.push(table.rows[i].cells[0].innerText);
+    }
+
+    //get Énoncé
+    var enonce = document.getElementById('enonce').innerText;
+
+    //get Questions
+    var questions = document.getElementById('questionSection').children;
+
+    var questionsList = [];
+    for(let i=0; i<questions.length; i++){
+        let innerText = questions[i].innerText; //question text
+        let tagName = questions[i].children[1].tagName; //type of answer
+        let nbRows = questions[i].children[1].rows;
+        questionsList.push({innerText: innerText, tagName: tagName, nbRows: nbRows});
+    }
+
+    var objToBeSent = {listID: ids, enonce: enonce, questions: questionsList};
+
+    //TODO API SEND
+}
