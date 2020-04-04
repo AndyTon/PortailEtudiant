@@ -24,8 +24,8 @@ var con = mysql.createConnection({
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(function(req, res, next) {
     // Technically, the access should be managed, but for this project, all sources are accepted for the moment.
@@ -34,7 +34,7 @@ app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Methods', '*');
     res.header('Access-Control-Max-Age', '86400');
     next();
-  });
+});
 
 var port = 3000;
 

@@ -129,10 +129,29 @@ function save(){
         let innerText = questions[i].innerText; //question text
         let tagName = questions[i].children[1].tagName; //type of answer
         let nbRows = questions[i].children[1].rows;
-        questionsList.push({innerText: innerText, tagName: tagName, nbRows: nbRows});
+
+        let stringified = `${innerText}:${tagName}:${nbRows}`;
+
+        questionsList.push(stringified);
     }
 
-    var objToBeSent = {listID: ids, enonce: enonce, questions: questionsList};
+    console.log(questionsList);
 
-    //TODO API SEND
+    var objToBeSent = {listID: ids, enonce: enonce, questions: questionsList};
+    console.log(objToBeSent);
+
+    var json = JSON.stringify(objToBeSent);
+
+    console.log(json);
+
+    fetch('http://localhost:4000/exercice/saveExercise', {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+        method: 'POST',
+        body: json
+    }).then((response) => {
+        console.log(response);
+    })
 }
