@@ -138,11 +138,7 @@ function save(){
     console.log(questionsList);
 
     var objToBeSent = {listID: ids, enonce: enonce, questions: questionsList};
-    console.log(objToBeSent);
-
-    var json = JSON.stringify(objToBeSent);
-
-    console.log(json);
+    var jsonObjToBeSent = JSON.stringify(objToBeSent);
 
     fetch('http://localhost:4000/exercice/saveExercise', {
         headers: {
@@ -150,7 +146,7 @@ function save(){
             'Content-Type': 'application/json'
           },
         method: 'POST',
-        body: json
+        body: jsonObjToBeSent
     }).then((response) => {
         console.log(response);
     })

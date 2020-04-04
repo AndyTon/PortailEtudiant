@@ -15,12 +15,12 @@ var con = mysql.createConnection({
     user: "root",
     password: "123",
     database: "portailetudiant"
-  });
+});
   
-  con.connect(function(err) {
+con.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
-  });
+});
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST

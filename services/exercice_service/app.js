@@ -1,6 +1,23 @@
+var exerciceService = require('./controller/exercice');
+
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
+
+// Database connection
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "123",
+    database: "portailetudiant"
+});
+  
+con.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -28,6 +45,13 @@ router.route("/saveExercise")
 .post(function (req, res) {
     //Request handling
     console.log(req.body);
+    console.log(req.body.listID);
+    console.log(req.body.enonce);
+    console.log(req.body.questions);
+
+    exerciceService.saveExercice(con, req.body.listID, req.body.enonce, req.body.questions, function(result){
+
+    });
 
     res.end();
 });
