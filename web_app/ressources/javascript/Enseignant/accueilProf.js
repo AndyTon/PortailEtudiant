@@ -100,3 +100,7 @@ function toVoirEleves(){
 function toCreerExercice(){
     window.location.href = "http://localhost:2000/CreerExercice";
 }
+
+function toCorrigerExercice(){
+    window.location.href = "http://localhost:2000/CorrigerExercice";
+}

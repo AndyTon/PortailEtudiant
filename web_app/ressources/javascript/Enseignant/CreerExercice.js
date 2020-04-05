@@ -143,8 +143,13 @@ function save(){
     fetch('http://localhost:4000/exercice/saveExercise', {
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'lastName': getLastNameFromCookies(),
+            'firstName': getFirstNameFromCookies(),
+            'email': getEmailFromCookies(),
+            'role': getRoleFromCookies()
           },
+          
         method: 'POST',
         body: jsonObjToBeSent
     }).then((response) => {

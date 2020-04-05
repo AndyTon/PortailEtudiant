@@ -49,9 +49,27 @@ router.route("/saveExercise")
     console.log(req.body.enonce);
     console.log(req.body.questions);
 
-    exerciceService.saveExercice(con, req.body.listID, req.body.enonce, req.body.questions, function(result){
+    let lastName = req.header('lastName');
+    let firstName = req.header('firstName');
+    let email = req.header('email');
+    let role = req.header('role');
+
+    exerciceService.saveExercice(con, lastName, firstName, email, role, req.body.titre, req.body.listID, req.body.enonce, req.body.questions, function(result){
 
     });
 
     res.end();
+});
+
+router.route("/getStudentExercices")
+.get(function (req,res) {
+    //Request handling
+    var lastName = req.header('lastName');
+    var firstName = req.header('firstName');
+    var email = req.header('email');
+    var role = req.header('role');
+
+    exerciceService.getAllStudentExercices(con, lastName, firstName, email, role, function(result){
+
+    });
 });
