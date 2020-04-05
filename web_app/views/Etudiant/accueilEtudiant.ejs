@@ -4,27 +4,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
     />
     <script type="text/javascript" src="./javascript/accueil.js"></script>
+    <script type="text/javascript" src="./javascript/Etudiant/accueilEtudiant.js"></script>
     <link rel="stylesheet" type="text/css" href="./CSS/all.css" />
-    <link rel="stylesheet" type="text/css" href="./CSS/accueil.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./CSS/Etudiant/accueilEtudiant.css"
+    />
+    <link rel="stylesheet" type="text/css" href="./CSS/accueil/accueil.css" />
     <title>Portail Étudiant</title>
   </head>
+
   <body onload="onPageLoad()">
+    <div class="" id="banner">
+      <h2 id="bannerText">Accueil</h2>
+    </div>
     <div class="container">
-      <div class="" id="banner">
-        <h2 id="bannerText">Accueil</h2>
+
+      <div class="col-sm-12">
+        <div class="row">
+          <button onclick="logout()" type="button" class="btn btn-secondary">
+            Logout
+          </button>
+        </div>
+
+        <div class="row">
+          Liste des exercices
+        </div>
+
+        <div class="allExerciceSection">
+          <div id="exerciceCard">
+            <div>
+                Exercice: Titre exercice
+            </div>
+            <div>
+              Enseignant: Andy Ton
+            </div>
+            <div>
+                Addresse courriel: andytonthat08@gmail.com
+            </div>
+          </div>
+        </div>
+
+        
       </div>
 
-      <div class='row'>
-        Que voulez-vous faire?
-      </div>
-      <div class='row'>
-        <div class='box-button'>
-          Voir mes élèves
-        </div>
-      </div>
     </div>
   </body>
 </html>

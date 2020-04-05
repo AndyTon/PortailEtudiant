@@ -3,7 +3,7 @@ function onPageLoad(){
 }
 
 function populateallSection(){
-    fetch('http://localhost:4000/exercice/getStudentExercices', {
+    fetch('http://localhost:4000/exercice/getExercicesForTeacher', {
         method: 'GET',
         headers: {
             'lastName': getLastNameFromCookies(),

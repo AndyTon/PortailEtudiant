@@ -100,7 +100,39 @@ function AddQuestion(){
         textArea.setAttribute('class', 'form-control');
         textArea.setAttribute('rows', '10');
         answerOption = textArea;
-    } 
+    } else if(val === "Question à choix multiple"){
+        var generalDiv = document.createElement('div');
+
+        var radioForm = document.createElement('div');
+        radioForm.setAttribute('class', 'form-check');
+
+        var radioObject = document.createElement("INPUT");
+        radioObject.setAttribute('class', 'form-check-input');
+        radioObject.setAttribute("type", "radio");
+        radioObject.setAttribute('name', "radio"+counter++);
+        radioObject.checked = true;
+
+        var radioLabel = document.createElement('LABEL');
+        radioLabel.innerHTML = "option1";
+        radioLabel.setAttribute('class', 'form-check-label');
+        radioLabel.setAttribute('contenteditable', 'true');
+
+        radioForm.appendChild(radioObject);
+        radioForm.appendChild(radioLabel);
+        
+        var addRadioButton = document.createElement('BUTTON');
+        addRadioButton.setAttribute('class', 'row btn btn-primary btn-sm');
+        addRadioButton.setAttribute('style', 'margin-left: 0px;');
+        addRadioButton.setAttribute('onclick', 'addMultipleChoiceOption(this)');
+        addRadioButton.innerHTML = "Add option";
+
+        generalDiv.appendChild(radioForm);
+        generalDiv.appendChild(addRadioButton);
+
+        answerOption = generalDiv;
+    }
+
+    
 
     div.appendChild(questionNode);
     div.appendChild(answerOption);
@@ -109,14 +141,11 @@ function AddQuestion(){
 
 }
 
+var counter=0;
 function save(){
-    var table = document.getElementById('studentTable');
 
-    //get all IDs
-    let ids = [];
-    for(let i=1; i<table.rows.length; i++){
-        ids.push(table.rows[i].cells[0].innerText);
-    }
+    //get Titre
+    var titre = document.getElementById('titre').innerText;
 
     //get Énoncé
     var enonce = document.getElementById('enonce').innerText;
@@ -126,18 +155,39 @@ function save(){
 
     var questionsList = [];
     for(let i=0; i<questions.length; i++){
-        let innerText = questions[i].innerText; //question text
-        let tagName = questions[i].children[1].tagName; //type of answer
-        let nbRows = questions[i].children[1].rows;
+        let stringified;
 
-        let stringified = `${innerText}:${tagName}:${nbRows}`;
+        let innerText; //question text
+        let tagName = questions[i].children[1].tagName; //type of answer
+
+        if(tagName === "TEXTAREA"){
+            innerText = questions[i].innerText;
+            let nbRows = questions[i].children[1].rows;
+            let solution = questions[i].children[1].value;
+            stringified = `${innerText}:${tagName}:${nbRows}:${solution}`;
+        } else if(tagName === "DIV"){
+            innerText = questions[i].children[0].innerText;
+            let radioOptionsDiv = questions[i].children[1];
+            let stringOption = radioOptionsDiv.children[0].children[1].innerHTML;
+
+            if(radioOptionsDiv.children[0].children[0].checked){
+                stringOption += "!checked";
+            }
+
+            for(let i=1; i<radioOptionsDiv.children.length - 1; i++){
+                stringOption += `>${radioOptionsDiv.children[i].children[1].innerHTML}`;
+                if(radioOptionsDiv.children[i].children[0].checked){
+                    stringOption += "!checked";
+                }
+            }
+
+            stringified = `${innerText}:${tagName}:${stringOption}`;
+        }
 
         questionsList.push(stringified);
     }
 
-    console.log(questionsList);
-
-    var objToBeSent = {listID: ids, enonce: enonce, questions: questionsList};
+    var objToBeSent = {titre: titre, enonce: enonce, questions: questionsList};
     var jsonObjToBeSent = JSON.stringify(objToBeSent);
 
     fetch('http://localhost:4000/exercice/saveExercise', {
@@ -155,4 +205,28 @@ function save(){
     }).then((response) => {
         console.log(response);
     })
+}
+
+function addMultipleChoiceOption(button){
+    
+    let generalDiv = button.parentNode;
+    let inputName = generalDiv.firstChild.firstChild.getAttribute('name');
+
+    let radioForm = document.createElement('div');
+        radioForm.setAttribute('class', 'form-check');
+
+        var radioObject = document.createElement("INPUT");
+        radioObject.setAttribute('class', 'form-check-input');
+        radioObject.setAttribute("type", "radio");
+
+        var radioLabel = document.createElement('LABEL');
+        radioLabel.innerHTML = "option";
+        radioLabel.setAttribute('class', 'form-check-label');
+        radioLabel.setAttribute('contenteditable', 'true');
+        radioObject.setAttribute('name', inputName);
+
+        radioForm.appendChild(radioObject);
+        radioForm.appendChild(radioLabel);
+
+    generalDiv.insertBefore(radioForm, button);
 }

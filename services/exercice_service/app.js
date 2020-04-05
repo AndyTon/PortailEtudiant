@@ -44,8 +44,7 @@ app.use("/exercice", router);
 router.route("/saveExercise")
 .post(function (req, res) {
     //Request handling
-    console.log(req.body);
-    console.log(req.body.listID);
+    console.log(req.body.titre);
     console.log(req.body.enonce);
     console.log(req.body.questions);
 
@@ -54,14 +53,14 @@ router.route("/saveExercise")
     let email = req.header('email');
     let role = req.header('role');
 
-    exerciceService.saveExercice(con, lastName, firstName, email, role, req.body.titre, req.body.listID, req.body.enonce, req.body.questions, function(result){
+    exerciceService.saveExercice(con, lastName, firstName, email, role, req.body.titre, req.body.enonce, req.body.questions, function(result){
 
     });
 
     res.end();
 });
 
-router.route("/getStudentExercices")
+router.route("/getExercicesForTeacher")
 .get(function (req,res) {
     //Request handling
     var lastName = req.header('lastName');
@@ -69,7 +68,20 @@ router.route("/getStudentExercices")
     var email = req.header('email');
     var role = req.header('role');
 
-    exerciceService.getAllStudentExercices(con, lastName, firstName, email, role, function(result){
+    exerciceService.getExercicesForTeacher(con, lastName, firstName, email, role, function(result){
+
+    });
+});
+
+router.route("/getExercicesForStudents")
+.get(function (req,res) {
+    //Request handling
+    var lastName = req.header('lastName');
+    var firstName = req.header('firstName');
+    var email = req.header('email');
+    var role = req.header('role');
+
+    exerciceService.getExercicesForStudents(con, lastName, firstName, email, role, function(result){
 
     });
 });

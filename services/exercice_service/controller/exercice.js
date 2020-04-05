@@ -1,7 +1,20 @@
 //The function receives these:
     // - Title of the exercise
+        // String Format
     // - The 'enonce' of the exercise
+        // String Format
     // - the questions of the exercise
+        // Array Format
+        // Here is the format of each element. There are currently three types of questions, so three formats.
+            // - TEXTAREA -> Type question à réponse courte 'question : TEXTAREA : 2 : solution'
+            // - TEXTAREA -> Type question à développement 'question : TEXTAREA : 10 : solution'
+            // - DIV -> Type question à choix multiples 'question : DIV : solution'
+                            // the solution is inside the options.
+                            // Each option is separated by a '>'
+                            // the 'checked' option has a '!checked' behind it
+                            // example: 'question1:DIV:option1!checked>option>option2' there are three options. option1 is checked and is the solution.
+                        
+        // Example: ['question1:DIV:option1!checked>option>option2', 'question2:TEXTAREA:10:solution']
     // - professor's last name
     // - professor's first name
     // - professor's email
@@ -9,7 +22,7 @@
 
 // The function need to return a true if the exercise was saved correctly.
 
-function saveExercice(con, ProfLastName, ProfFirstName, ProfEmail, ProfRole, titre, listID, enonce, questions, callback){
+function saveExercice(con, ProfLastName, ProfFirstName, ProfEmail, ProfRole, titre, enonce, questions, callback){
     
 }
 
@@ -19,7 +32,7 @@ function saveExercice(con, ProfLastName, ProfFirstName, ProfEmail, ProfRole, tit
     // - professor's email
     // - professor's role
 
-// The function need to return:
+// The function needs to return:
     // - The Title of the exercise
     // - The student ID
     // - The student's last name
@@ -30,9 +43,27 @@ function saveExercice(con, ProfLastName, ProfFirstName, ProfEmail, ProfRole, tit
 
 // Voir http://localhost:2000/CorrigerExercice pour exemple de l'information dont on a besoin.
 
-function getAllStudentExercices(con, ProfLastName, ProfFirstName, ProfEmail, ProfRole, callback){
+function getExercicesForTeacher(con, ProfLastName, ProfFirstName, ProfEmail, ProfRole, callback){
+
+}
+
+// The function will receive the professors account details.
+    // - student's last name
+    // - student's first name
+    // - student's email
+    // - student's role
+
+// The function needs to return:
+    // - The Title of the exercise
+    // - The professor's last name
+    // - The professor's first name
+    // - The professor's email
+
+// Voir http://localhost:2000/accueilEtudiant pour exemple de l'information dont on a besoin.
+function getExercicesForStudents(con, StudentLastName, StudentFirstName, StudentEmail, StudentRole, callback){
 
 }
 
 exports.saveExercice = saveExercice;
-exports.getAllStudentExercices = getAllStudentExercices;
+exports.getExercicesForTeacher = getExercicesForTeacher;
+exports.getExercicesForStudents = getExercicesForStudents;
