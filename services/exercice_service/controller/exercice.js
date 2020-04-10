@@ -23,7 +23,14 @@
 // The function need to return a true if the exercise was saved correctly.
 
 function saveExercice(con, ProfLastName, ProfFirstName, ProfEmail, ProfRole, titre, enonce, questions, callback){
-    
+    // A faire apres
+    let sql = "INSERT INTO exercices(id_prof, enonce_exercice, email) VALUES ( (SELECT id FROM utilisateurs WHERE email='"+email+"'),'"+enonce+"','"+email+"')";
+
+    con.query(sql, (err, resultat) => {
+        if (err) throw err;
+
+            return callback(true);
+    });
 }
 
 // The function will receive the professors account details.
@@ -44,10 +51,17 @@ function saveExercice(con, ProfLastName, ProfFirstName, ProfEmail, ProfRole, tit
 // Voir http://localhost:2000/CorrigerExercice pour exemple de l'information dont on a besoin.
 
 function getExercicesForTeacher(con, ProfLastName, ProfFirstName, ProfEmail, ProfRole, callback){
+    let sql = "SELECT enonce_exercice,id_eleve,nom,prenom,solution_eleve.email FROM  exercices, solution_eleve left join utilisateurs ON id_eleve=id where solution_eleve.id_exercice in (SELECT id_exercice FROM exercices WHERE email='"+email+"') AND prof=0 AND solution_eleve.id_exercice=exercices.id_exercice";
 
+    con.query(sql, (err, resultat) => {
+        if (err) throw err;
+
+            return callback(true,resultat);
+
+    });
 }
 
-// The function will receive the professors account details.
+// The function will receive the Student account details.
     // - student's last name
     // - student's first name
     // - student's email
@@ -60,8 +74,16 @@ function getExercicesForTeacher(con, ProfLastName, ProfFirstName, ProfEmail, Pro
     // - The professor's email
 
 // Voir http://localhost:2000/accueilEtudiant pour exemple de l'information dont on a besoin.
+//Retourne tout les exercices qui ne sont pas faites par cet etudiant
 function getExercicesForStudents(con, StudentLastName, StudentFirstName, StudentEmail, StudentRole, callback){
+    let sql = "SELECT id_exercice, enonce_exercice, exercices.email, prenom, nom FROM exercices LEFT JOIN utilisateurs ON id=id_prof WHERE id_exercice NOT IN (SELECT id_exercice FROM solution_eleve WHERE email='"+email+"')";
 
+    con.query(sql, (err, resultat) => {
+        if (err) throw err;
+
+            return callback(true,resultat);
+
+    });
 }
 
 // This function is for the student to do his exercise, once he has chosen an exercise from his list of exercises to do.
@@ -76,6 +98,14 @@ function getExercicesForStudents(con, StudentLastName, StudentFirstName, Student
 
 function getExerciceForStudent(con, exerciceId, callback){
 
+    let sql = "SELECT id_exercice,id_prof,enonce_exercice FROM exercices WHERE id_exercice="+exerciceId;
+
+    con.query(sql, (err, resultat) => {
+        if (err) throw err;
+
+            return callback(true,resultat);
+
+    });
 }
 
 // This function is for the student to complete his exercise and submit his solution.
@@ -83,12 +113,19 @@ function getExerciceForStudent(con, exerciceId, callback){
     // - exercice Id
     // - id prof
     // - solution eleve
+    // peut tu m'envoyer l'email de l'etudiant ainsi que son ID ici aussi stp
 
 // The function should return:
     // boolean if save was successful
 
-function saveSolutionForStudent(con, exerciceId, idprof, solutionEleve, callback){
+function saveSolutionForStudent(con, exerciceId, idprof,idEleve, emailE, solutionEleve, callback){
+    let sql = "INSERT INTO solution_eleve(id_eleve, id_prof, id_exercice, solutionE, email) VALUES ("+idEleve+","+idprof+","+exerciceId+",'"+solutionEleve+"', '"+emailE+"')";
 
+    con.query(sql, (err, resultat) => {
+        if (err) throw err;
+
+            return callback(true);
+    });
 }
 
 // This function is for when the professor looks at the student's solution and corrects it
@@ -103,8 +140,14 @@ function saveSolutionForStudent(con, exerciceId, idprof, solutionEleve, callback
 // The function should return 
     // - boolean if save was successful
 
-function saveProfessorCorrection(){
+function saveProfessorCorrection(idprof,ideleve,idExercice,note){
+    let sql = "update solution_eleve set note_attribue="+note+" where id_prof="+idprof+" and id_eleve="+ideleve+" and id_exercice="+exerciceId+"" ;
 
+    con.query(sql, (err, resultat) => {
+        if (err) throw err;
+
+            return callback(true);
+    });
 }
 
 
