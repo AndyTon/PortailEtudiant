@@ -64,6 +64,50 @@ function getExercicesForStudents(con, StudentLastName, StudentFirstName, Student
 
 }
 
+// This function is for the student to do his exercise, once he has chosen an exercise from his list of exercises to do.
+// The function should receive
+    // - exercice Id
+
+// The function should return:
+    // - Exercice Id
+    // - id prof
+    // - enonce exercice
+    // - question exercice
+
+function getExerciceForStudent(con, exerciceId, callback){
+
+}
+
+// This function is for the student to complete his exercise and submit his solution.
+// The function should receive
+    // - exercice Id
+    // - id prof
+    // - solution eleve
+
+// The function should return:
+    // boolean if save was successful
+
+function saveSolutionForStudent(con, exerciceId, idprof, solutionEleve, callback){
+
+}
+
+// This function is for when the professor looks at the student's solution and corrects it
+// the function should receive
+    // - exercice Id
+    // - professor's last name
+    // - professor's first name
+    // - professor's email
+    // - professor's role
+    // - Note attribué
+
+// The function should return 
+    // - boolean if save was successful
+
+function saveProfessorCorrection(){
+
+}
+
+
 exports.saveExercice = saveExercice;
 exports.getExercicesForTeacher = getExercicesForTeacher;
 exports.getExercicesForStudents = getExercicesForStudents;
