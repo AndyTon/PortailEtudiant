@@ -11,7 +11,7 @@ function populateExercise() {
   fetch(url, {
     method: "GET",
     headers: {
-      id: id,
+      'id': id,
     },
   })
     .then((response) => {

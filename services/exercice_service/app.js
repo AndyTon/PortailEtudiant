@@ -113,3 +113,18 @@ router.route("/saveSolutionForStudent")
         }
     });
 });
+
+router.route('/getSolutionStudent')
+.get(function(req,res){
+    let id_exercice = req.header('id_exercice');
+    let id_etudiant = req.header('id_etudiant');
+    let id_prof = req.header('id_prof');
+
+    exerciceService.getSolutionStudent(con, id_exercice, id_etudiant, id_prof, function(result, solution){
+        if(result){
+            res.status(200).send(solution);
+        } else {
+            res.status(403).send();
+        }
+    })
+})

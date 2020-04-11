@@ -14,6 +14,10 @@ function route(app) {
   app.get("/CorrigerExercice", (req,res) => {
     res.render("Enseignant/CorrigerExercice");
   });
+
+  app.get('/correction', (req,res) => {
+    res.render('Enseignant/correction');
+  })
 }
 
 exports.route = route;

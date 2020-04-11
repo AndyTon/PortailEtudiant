@@ -150,6 +150,19 @@ function saveProfessorCorrection(idprof,ideleve,idExercice,note){
     });
 }
 
+// This function is for professors to correct the student's solution.
+// This function should return:
+//     - Boolean if successful
+//     - enonce
+//     - student prenom
+//     - student nom
+//     - student email
+//     - questions
+//     - student Solution
+
+function getSolutionStudent(con, id_exercice, id_etudiant, id_prof, callback){
+
+}
 
 exports.saveExercice = saveExercice;
 exports.getExercicesForTeacher = getExercicesForTeacher;

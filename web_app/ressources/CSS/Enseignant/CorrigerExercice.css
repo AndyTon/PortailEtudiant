@@ -1,4 +1,4 @@
-#studentCard{
+.studentCard{
     cursor: pointer;
     background-color: lightgray;
     margin: 10px;
@@ -8,6 +8,10 @@
     border-style: solid;
 }
 
-#studentCard:hover{
+.studentCard:hover{
     background-color: gray;
+}
+
+.hiddenId{
+    display: none;
 }
