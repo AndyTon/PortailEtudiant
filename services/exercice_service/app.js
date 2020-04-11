@@ -131,11 +131,12 @@ router.route('/getSolutionStudent')
 
 router.route('/saveProfessorCorrection')
 .post(function(req,res){
-    let idprof = req.header('id_prof');
-    let ideleve = req.header('id_etudiant');
-    let idExercice = req.header('id_exercice');
+    let note = req.header('note');
+    let idprof = req.header('idprof');
+    let ideleve = req.header('ideleve');
+    let idExercice = req.header('idExercice');
 
-    exerciceService.saveProfessorCorrection(con, idprof, ideleve, idExercice, function(result){
+    exerciceService.saveProfessorCorrection(con, idprof, ideleve, idExercice, note, function(result){
         if(result){
             res.status(200).send();
         } else {
