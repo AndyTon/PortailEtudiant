@@ -161,7 +161,15 @@ function saveProfessorCorrection(con, idprof,ideleve,idExercice,note){
 //     - student Solution
 
 function getSolutionStudent(con, id_exercice, id_etudiant, id_prof, callback){
+    
+    let sql = "SELECT solutionE,enonce_exercice FROM exercices left join solution_eleve on solution_eleve.id_exercice=exercices.id_exercice WHERE exercices.id_exercice="+id_exercice+ " and solution_eleve.id_prof="+id_prof+ " and id_eleve="+id_etudiant;
 
+    con.query(sql, (err, resultat) => {
+        if (err) throw err;
+
+            return callback(true,resultat);
+
+    });
 }
 
 exports.saveExercice = saveExercice;
