@@ -105,7 +105,11 @@ function populateAllExerciseSection(){
             return response.json();
         }
     }).then((result) =>{
-        resultToHTML(result);
+        if(result != ""){
+            resultToHTML(result);
+        } else {
+            document.getElementById('allExerciceSection').innerText = "Vous n'avez aucun exercice :)";
+        }
     });
 }
 

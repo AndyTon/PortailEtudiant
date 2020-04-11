@@ -62,8 +62,9 @@ router.route("/getExercicesForTeacher")
 
     exerciceService.getExercicesForTeacher(con, email, function(result, exercises){
         if(result){
-            console.log(exercises);
             res.status(200).send(exercises);
+        } else {
+            res.status(403).send();
         }
     });
 });
@@ -94,4 +95,21 @@ router.route("/getExerciceForStudent")
             res.status(403).send();
         }
     })
+});
+
+router.route("/saveSolutionForStudent")
+.post(function(req,res){
+    let idExercice = req.header('idExercice');
+    let idProf = req.header('idProf');
+    let idEleve = req.header('idEleve');
+    let emailEleve = req.header('email');
+    let solution = req.header('solution');
+
+    exerciceService.saveSolutionForStudent(con, idExercice, idProf, idEleve, emailEleve, solution, function(result){
+        if(result){
+            res.status(200).send();
+        } else {
+            res.status(403).send();
+        }
+    });
 });

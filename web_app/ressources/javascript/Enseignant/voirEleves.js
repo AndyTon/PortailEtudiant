@@ -75,3 +75,11 @@ function insertRow(table, firstCell, secondCell, thirdCell){
     cell1.innerHTML = secondCell;
     cell2.innerHTML = thirdCell;
 }
+
+function toAccueil(){
+    window.location.href = "http://localhost:2000/accueilProf";
+}
+
+function back(){
+    window.location.href = "http://localhost:2000/accueilProf";
+}

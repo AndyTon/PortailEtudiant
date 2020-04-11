@@ -13,8 +13,30 @@ function populateallSection(){
             return response.json();
         }
     }).then((result) =>{
-        console.log(result);
+        if(result != ""){
+            resultToHTML(result);
+        } else {
+            document.getElementById('allExerciceSection').innerText = "Vous n'avez aucun exercice à corriger :)";
+        }
     });
+}
+
+function resultToHTML(result){
+    for(let i=0; i<result.length; i++){
+        let id_exercice = result[i].id_exercice;
+        let enonce = result[i].enonce_exercice;
+        let email = result[i].email;
+        let prenom = result[i].prenom;
+        let nom = result[i].nom;
+        buildExerciseCard(id_exercice, enonce, email, prenom, nom);
+        
+    }
+}
+
+function buildExerciseCard(id_exercice, enonce, email, prenom, nom){
+
+    let titre = enonce.slice(0,enonce.indexOf('>'));
+    console.log(titre);
 }
 
 function getLastNameFromCookies(){

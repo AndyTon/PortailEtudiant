@@ -51,7 +51,7 @@ function saveExercice(con, email, enonce, questions, callback){
 // Voir http://localhost:2000/CorrigerExercice pour exemple de l'information dont on a besoin.
 
 function getExercicesForTeacher(con, email, callback){
-    let sql = "SELECT enonce_exercice,id_eleve,nom,prenom,solution_eleve.email FROM  exercices, solution_eleve left join utilisateurs ON id_eleve=id where solution_eleve.id_exercice in (SELECT id_exercice FROM exercices WHERE email='"+email+"') AND prof=0 AND solution_eleve.id_exercice=exercices.id_exercice";
+    let sql = "SELECT exercices.id_exercice,enonce_exercice,id_eleve,nom,prenom,solution_eleve.email FROM  exercices, solution_eleve left join utilisateurs ON id_eleve=id where solution_eleve.id_exercice in (SELECT id_exercice FROM exercices WHERE email='"+email+"') AND prof=0 AND solution_eleve.id_exercice=exercices.id_exercice";
 
     con.query(sql, (err, resultat) => {
         if (err) throw err;
@@ -155,3 +155,4 @@ exports.saveExercice = saveExercice;
 exports.getExercicesForTeacher = getExercicesForTeacher;
 exports.getExercicesForStudents = getExercicesForStudents;
 exports.getExerciceForStudent = getExerciceForStudent;
+exports.saveSolutionForStudent = saveSolutionForStudent;

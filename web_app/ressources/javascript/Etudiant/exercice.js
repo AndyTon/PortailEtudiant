@@ -20,6 +20,7 @@ function populateExercise() {
       }
     })
     .then((result) => {
+      let idProf = result[0].id_prof;
       let titre = result[0].enonce_exercice.slice(
         0,
         result[0].enonce_exercice.indexOf(">")
@@ -29,14 +30,14 @@ function populateExercise() {
         result[0].enonce_exercice.length
       );
       let questions = result[0].questions;
-      resultToHTML(titre, enonce_exercice, questions);
+      resultToHTML(idProf, titre, enonce_exercice, questions);
     });
 }
 
-function resultToHTML(titre, enonce_exercice, questions) {
+function resultToHTML(idProf, titre, enonce_exercice, questions) {
+  document.getElementById("idProf").innerText = idProf;
   document.getElementById("titre").innerText = titre;
   document.getElementById("enonce").innerText = enonce_exercice;
-  console.log(questions);
 
   questions.split(",").map((question) => {
     let arr = question.split(':');
@@ -45,6 +46,7 @@ function resultToHTML(titre, enonce_exercice, questions) {
     } else if(arr[1] == "DIV"){
         addRadioArea(arr[0], arr[2]);
     }
+    solCounter++;
   });
 }
 
@@ -56,6 +58,7 @@ function addTextArea(question, numberRows){
     var textArea = document.createElement("TEXTAREA");
     textArea.setAttribute('class', 'form-control');
     textArea.setAttribute('rows', numberRows);
+    textArea.setAttribute('id', `solution${solCounter}`)
 
     div.appendChild(questionNode);
     div.appendChild(textArea);
@@ -72,6 +75,7 @@ function setQuestionArea(question) {
 }
 
 var counter=0;
+var solCounter=0;
 
 function addRadioArea(question, options){
     let questionSection = document.getElementById('questionSection');
@@ -79,6 +83,7 @@ function addRadioArea(question, options){
     var { div, questionNode } = setQuestionArea(question);
 
     var generalDiv = document.createElement('div');
+    generalDiv.setAttribute('id', `solution${solCounter}`)
     // option1>option!checked
     options.split('>').map(option => {
         let optionName = option;
@@ -120,5 +125,79 @@ function back() {
 }
 
 function soumettre(){
-    
+  let email = getEmailFromCookies();
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  let idExercice = urlParams.get("id");
+
+  let idProf = document.getElementById('idProf').innerText;
+
+  let idEleve = getIDfromCookies();
+
+  let solutionStringified = buildSolution();
+
+    fetch("http://localhost:4000/exercice/saveSolutionForStudent", {
+      method: "POST",
+      headers: {
+        'idExercice': idExercice,
+        'idProf': idProf,
+        'idEleve': idEleve,
+        'email': email,
+        'solution': solutionStringified
+      }
+    })
+    .then((response) => {
+      if(response.ok){
+        window.location.href = "http://localhost:2000/accueilEtudiant";
+      }
+    });
+}
+function buildSolution(){
+  let solutionDiv = document.getElementById('questionSection');
+  let stringified = "";
+
+  let solution = document.getElementById(`solution0`);
+    if(solution.nodeName === "TEXTAREA"){
+      stringified = solution.value;
+    } else if(solution.nodeName === "DIV") {
+      console.log('hey');
+    }
+
+  for(let i=1; i<solutionDiv.childElementCount; i++){
+    solution = document.getElementById(`solution${i}`);
+    if(solution.nodeName === "TEXTAREA"){
+      stringified = `${stringified}:${solution.value}`;
+    } else if(solution.nodeName === "DIV") {
+      
+      for(let j=0;j<solution.childElementCount; j++){
+        if(solution.children[j].children[0].checked){
+          stringified = `${stringified}:Checked-${j}`;
+        }
+      }
+
+    }
+  }
+
+  return stringified;
+}
+
+function getEmailFromCookies(){
+  var arrayCookies = document.cookie.split(';');
+
+  for (x of arrayCookies){
+      if(x.includes('email=')){
+          return x.substring('email='.length+1, x.length);
+      }
+  }
+}
+
+function getIDfromCookies(){
+  var arrayCookies = document.cookie.split(';');
+
+  for (x of arrayCookies){
+      if(x.includes('id=')){
+          return x.substring('id='.length+1, x.length);
+      }
+  }
 }
