@@ -1,0 +1,11 @@
+.middle_col{
+    border-right-style: groove;
+}
+
+.answer{
+    padding-left: 10px;
+}
+
+label {
+    font-weight: bold;
+}

@@ -34,7 +34,33 @@ function populateCorrection() {
     }
   }).then((result) => {
     //to do
-    
+    resultToHTML();
+  })
+}
+
+function resultToHTML(){
+  var enonce = document.getElementById('enonce');
+
+  var studentInfo = document.getElementById('studentInfo');
+
+  var questionSection = document.getElementById('questionSection');
+}
+
+function soumettre(){
+  var note = document.getElementById('note').value;
+  let url = "http://localhost:4000/exercice/getSolutionStudent"
+
+  fetch(url, {
+    method: "POST",
+    headers:{
+      idprof:idprof,
+      ideleve: ideleve,
+      idExercice: idExercice
+    },
+  }).then((response)=>{
+    if(response.ok){
+      window.location.href = "http://localhost:2000/CorrigerExercice";
+    }
   })
 }
 

@@ -140,8 +140,8 @@ function saveSolutionForStudent(con, exerciceId, idprof,idEleve, emailE, solutio
 // The function should return 
     // - boolean if save was successful
 
-function saveProfessorCorrection(idprof,ideleve,idExercice,note){
-    let sql = "update solution_eleve set note_attribue="+note+" where id_prof="+idprof+" and id_eleve="+ideleve+" and id_exercice="+exerciceId+"" ;
+function saveProfessorCorrection(con, idprof,ideleve,idExercice,note){
+    let sql = "update solution_eleve set note_attribue="+note+" where id_prof="+idprof+" and id_eleve="+ideleve+" and id_exercice="+idExercice+"" ;
 
     con.query(sql, (err, resultat) => {
         if (err) throw err;
@@ -169,3 +169,5 @@ exports.getExercicesForTeacher = getExercicesForTeacher;
 exports.getExercicesForStudents = getExercicesForStudents;
 exports.getExerciceForStudent = getExerciceForStudent;
 exports.saveSolutionForStudent = saveSolutionForStudent;
+exports.getSolutionStudent = getSolutionStudent;
+exports.saveProfessorCorrection = saveProfessorCorrection;

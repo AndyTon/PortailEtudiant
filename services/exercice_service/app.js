@@ -127,4 +127,19 @@ router.route('/getSolutionStudent')
             res.status(403).send();
         }
     })
+});
+
+router.route('/saveProfessorCorrection')
+.post(function(req,res){
+    let idprof = req.header('id_prof');
+    let ideleve = req.header('id_etudiant');
+    let idExercice = req.header('id_exercice');
+
+    exerciceService.saveProfessorCorrection(con, idprof, ideleve, idExercice, function(result){
+        if(result){
+            res.status(200).send();
+        } else {
+            res.status(403).send();
+        }
+    })
 })
