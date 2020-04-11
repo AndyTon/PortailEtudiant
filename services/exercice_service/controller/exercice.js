@@ -22,9 +22,9 @@
 
 // The function need to return a true if the exercise was saved correctly.
 
-function saveExercice(con, ProfLastName, ProfFirstName, ProfEmail, ProfRole, titre, enonce, questions, callback){
+function saveExercice(con, email, enonce, questions, callback){
     // A faire apres
-    let sql = "INSERT INTO exercices(id_prof, enonce_exercice, email) VALUES ( (SELECT id FROM utilisateurs WHERE email='"+email+"'),'"+enonce+"','"+email+"')";
+    let sql = "INSERT INTO exercices(id_prof, enonce_exercice, email, questions) VALUES ( (SELECT id FROM utilisateurs WHERE email='"+email+"'),'"+enonce+"','"+email+"','"+questions+"')";
 
     con.query(sql, (err, resultat) => {
         if (err) throw err;
@@ -50,7 +50,7 @@ function saveExercice(con, ProfLastName, ProfFirstName, ProfEmail, ProfRole, tit
 
 // Voir http://localhost:2000/CorrigerExercice pour exemple de l'information dont on a besoin.
 
-function getExercicesForTeacher(con, ProfLastName, ProfFirstName, ProfEmail, ProfRole, callback){
+function getExercicesForTeacher(con, email, callback){
     let sql = "SELECT enonce_exercice,id_eleve,nom,prenom,solution_eleve.email FROM  exercices, solution_eleve left join utilisateurs ON id_eleve=id where solution_eleve.id_exercice in (SELECT id_exercice FROM exercices WHERE email='"+email+"') AND prof=0 AND solution_eleve.id_exercice=exercices.id_exercice";
 
     con.query(sql, (err, resultat) => {
@@ -75,13 +75,13 @@ function getExercicesForTeacher(con, ProfLastName, ProfFirstName, ProfEmail, Pro
 
 // Voir http://localhost:2000/accueilEtudiant pour exemple de l'information dont on a besoin.
 //Retourne tout les exercices qui ne sont pas faites par cet etudiant
-function getExercicesForStudents(con, StudentLastName, StudentFirstName, StudentEmail, StudentRole, callback){
+function getExercicesForStudents(con, email, callback){
     let sql = "SELECT id_exercice, enonce_exercice, exercices.email, prenom, nom FROM exercices LEFT JOIN utilisateurs ON id=id_prof WHERE id_exercice NOT IN (SELECT id_exercice FROM solution_eleve WHERE email='"+email+"')";
 
     con.query(sql, (err, resultat) => {
         if (err) throw err;
 
-            return callback(true,resultat);
+        return callback(true,resultat);
 
     });
 }
@@ -98,12 +98,12 @@ function getExercicesForStudents(con, StudentLastName, StudentFirstName, Student
 
 function getExerciceForStudent(con, exerciceId, callback){
 
-    let sql = "SELECT id_exercice,id_prof,enonce_exercice FROM exercices WHERE id_exercice="+exerciceId;
+    let sql = "SELECT id_exercice,id_prof,enonce_exercice,questions FROM exercices WHERE id_exercice="+exerciceId;
 
     con.query(sql, (err, resultat) => {
         if (err) throw err;
 
-            return callback(true,resultat);
+        return callback(true,resultat);
 
     });
 }
@@ -154,3 +154,4 @@ function saveProfessorCorrection(idprof,ideleve,idExercice,note){
 exports.saveExercice = saveExercice;
 exports.getExercicesForTeacher = getExercicesForTeacher;
 exports.getExercicesForStudents = getExercicesForStudents;
+exports.getExerciceForStudent = getExerciceForStudent;

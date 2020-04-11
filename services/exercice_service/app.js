@@ -44,44 +44,54 @@ app.use("/exercice", router);
 router.route("/saveExercise")
 .post(function (req, res) {
     //Request handling
-    console.log(req.body.titre);
-    console.log(req.body.enonce);
-    console.log(req.body.questions);
-
-    let lastName = req.header('lastName');
-    let firstName = req.header('firstName');
     let email = req.header('email');
-    let role = req.header('role');
 
-    exerciceService.saveExercice(con, lastName, firstName, email, role, req.body.titre, req.body.enonce, req.body.questions, function(result){
-
+    exerciceService.saveExercice(con, email, req.body.enonce, req.body.questions, function(result){
+        if(result){
+            res.status(200).send(result);
+        } else {
+            res.status(403).send();
+        }
     });
-
-    res.end();
 });
 
 router.route("/getExercicesForTeacher")
 .get(function (req,res) {
     //Request handling
-    var lastName = req.header('lastName');
-    var firstName = req.header('firstName');
     var email = req.header('email');
-    var role = req.header('role');
 
-    exerciceService.getExercicesForTeacher(con, lastName, firstName, email, role, function(result){
-
+    exerciceService.getExercicesForTeacher(con, email, function(result, exercises){
+        if(result){
+            console.log(exercises);
+            res.status(200).send(exercises);
+        }
     });
 });
 
 router.route("/getExercicesForStudents")
 .get(function (req,res) {
     //Request handling
-    var lastName = req.header('lastName');
-    var firstName = req.header('firstName');
     var email = req.header('email');
-    var role = req.header('role');
 
-    exerciceService.getExercicesForStudents(con, lastName, firstName, email, role, function(result){
-
+    exerciceService.getExercicesForStudents(con, email, function(result, exercices){
+        if(result){
+            res.status(200).send(exercices);
+        } else {
+            res.status(403).send();
+        }
     });
+});
+
+router.route("/getExerciceForStudent")
+.get(function(req,res){
+    // Request handling
+    var id = req.header('id');
+
+    exerciceService.getExerciceForStudent(con, id, function(result, exercise){
+        if(result){
+            res.status(200).send(exercise)
+        } else{
+            res.status(403).send();
+        }
+    })
 });

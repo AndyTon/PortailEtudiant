@@ -32,8 +32,8 @@ function checkForCredentials(){
         document.cookie = "email="+result.email;
         document.cookie = "role="+result.role;
 
-        if(result.role == "Étudiant"){
-            window.location.href = "http://localhost:2000/accueilEtudiant";
+        if(result.role == "Enseignant"){
+            window.location.href = "http://localhost:2000/accueilProf";
         }
     });
 }
@@ -103,4 +103,12 @@ function toCreerExercice(){
 
 function toCorrigerExercice(){
     window.location.href = "http://localhost:2000/CorrigerExercice";
+}
+
+function toAccueil(){
+    window.location.href = "http://localhost:2000/accueilProf";
+}
+
+function back(){
+    window.location.href = "http://localhost:2000/accueilProf";
 }

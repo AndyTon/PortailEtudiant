@@ -33,7 +33,7 @@ function checkForCredentials(){
         document.cookie = "email="+result.email;
         document.cookie = "role="+result.role;
 
-        if(result.role == "Étudiant"){
+        if(result.role == "Enseignant"){
             window.location.href = "http://localhost:2000/accueilEtudiant";
         }
     });
@@ -98,14 +98,64 @@ function populateAllExerciseSection(){
     fetch('http://localhost:4000/exercice/getExercicesForStudents', {
         method: 'GET',
         headers: {
-            'lastName': getLastNameFromCookies(),
-            'firstName': getFirstNameFromCookies(),
-            'email': getEmailFromCookies(),
-            'role': getRoleFromCookies()
+            'email': getEmailFromCookies()
         }
     }).then((response) =>{
-        //to do
+        if(response.ok){
+            return response.json();
+        }
     }).then((result) =>{
-        //to do
+        resultToHTML(result);
     });
+}
+
+function resultToHTML(result){
+    for(let i=0; i<result.length; i++){
+        let id_exercice = result[i].id_exercice;
+        let enonce = result[i].enonce_exercice;
+        let email = result[i].email;
+        let prenom = result[i].prenom;
+        let nom = result[i].nom;
+        buildExerciseCard(id_exercice, enonce, email, prenom, nom);
+        
+    }
+}
+
+function buildExerciseCard(id, enonce, email, prenom, nom){
+    let mainDiv = document.createElement('DIV');
+    mainDiv.setAttribute('class', 'exerciceCard');
+    mainDiv.setAttribute('onclick', 'toExercise(this)');
+
+    let hiddenIdDiv = document.createElement('DIV');
+    hiddenIdDiv.setAttribute('class', 'hiddenId');
+    hiddenIdDiv.innerText = id;
+
+    let enonceDiv = document.createElement('DIV');
+    enonceDiv.innerText = `Exercice: ${enonce.slice(0,enonce.indexOf('>'))}`;
+    
+    let nameDiv = document.createElement('DIV');
+    nameDiv.innerText = `Enseignant: ${prenom} ${nom}`;
+    
+    let emailDiv = document.createElement('DIV');
+    emailDiv.innerText = `Adresse courriel: ${email}`;
+
+    mainDiv.appendChild(hiddenIdDiv);
+    mainDiv.appendChild(enonceDiv);
+    mainDiv.appendChild(nameDiv);
+    mainDiv.appendChild(emailDiv);
+
+    document.getElementById('allExerciceSection').appendChild(mainDiv);
+}
+
+function toExercise(div){
+    let id_exercice = div.firstChild.innerText;
+    window.location.href = `http://localhost:2000/exercice?id=${id_exercice}`;
+}
+
+function toAccueil(){
+    window.location.href = "http://localhost:2000/accueilEtudiant";
+}
+
+function back(){
+    window.location.href = "http://localhost:2000/accueilEtudiant";
 }

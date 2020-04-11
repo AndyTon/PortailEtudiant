@@ -18,7 +18,7 @@ function validateCredentials(lastName, firstName, email, role, con, callback) {
             roleTeacher = 1;
         }
 
-        if (resultat[0].prenom == firstName && resultat[0].nom == lastName && resultat[0].prof[0] == roleTeacher) {
+        if (resultat[0].prenom == firstName && resultat[0].nom == lastName && resultat[0].prof == roleTeacher) {
             return callback(true);
         } else {
             return callback(false, resultat[0]);

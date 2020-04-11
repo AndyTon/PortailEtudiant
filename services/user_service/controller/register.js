@@ -26,7 +26,13 @@ function validateRegister(con, lastName, firstName, password, email, role, callb
                 function(err,result){
                     if(err) throw err;
 
-                    return callback(true);
+                    
+                    con.query(`SELECT id from utilisateurs WHERE email='${email}'`,
+                    function(err, result2){
+                        if(err) throw err;
+
+                        return callback(true, result2[0].id);
+                    })
                 });
         }
 

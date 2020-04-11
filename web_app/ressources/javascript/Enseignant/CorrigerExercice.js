@@ -6,15 +6,14 @@ function populateallSection(){
     fetch('http://localhost:4000/exercice/getExercicesForTeacher', {
         method: 'GET',
         headers: {
-            'lastName': getLastNameFromCookies(),
-            'firstName': getFirstNameFromCookies(),
-            'email': getEmailFromCookies(),
-            'role': getRoleFromCookies()
+            'email': getEmailFromCookies()
         }
     }).then((response) =>{
-        //to do
+        if(response.ok){
+            return response.json();
+        }
     }).then((result) =>{
-        //to do
+        console.log(result);
     });
 }
 
@@ -56,4 +55,12 @@ function getRoleFromCookies(){
             return x.substring('role='.length+1, x.length);
         }
     }
+}
+
+function toAccueil(){
+    window.location.href = "http://localhost:2000/accueilProf";
+}
+
+function back(){
+    window.location.href = "http://localhost:2000/accueilProf";
 }

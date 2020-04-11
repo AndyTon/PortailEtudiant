@@ -14,10 +14,3 @@ function deleteAllCookies() {
     }
 }
 
-function toAccueil(){
-    window.location.href = "http://localhost:2000/accueilProf";
-}
-
-function back(){
-    window.location.href = "http://localhost:2000/accueilProf";
-}

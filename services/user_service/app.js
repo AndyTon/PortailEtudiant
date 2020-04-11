@@ -60,7 +60,7 @@ router.route('/login')
                     //handle role
                     let role = "Étudiant";
                     
-                    if(user.prof[0] == 1){
+                    if(user.prof == 1){
                         role = "Enseignant";
                     }
                     
@@ -68,7 +68,8 @@ router.route('/login')
                                             'firstName' : user.prenom,
                                             'password': user.pw,
                                             'email' : user.email,
-                                            'role': role});
+                                            'role': role,
+                                            'id':user.id});
                 } else {
                     res.status(403).send();
                 }
@@ -103,7 +104,8 @@ router.route('/register')
                                                     'firstName' : firstName,
                                                     'password': password,
                                                     'email' : email,
-                                                    'role': role});
+                                                    'role': role,
+                                                    'id': message});
                         }
                     
                     });
@@ -130,7 +132,7 @@ router.route('/checkCredentials')
             } else {
                 
                 let profString = "Étudiant";
-                if(account.prof[0] == 1){
+                if(account.prof == 1){
                     profString = "Enseignant";
                 }
 

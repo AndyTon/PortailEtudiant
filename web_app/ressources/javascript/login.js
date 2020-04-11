@@ -125,6 +125,7 @@ function validate_login() {
             document.cookie = "firstName="+result.firstName;
             document.cookie = "email="+result.email;
             document.cookie = "role="+result.role;
+            document.cookie = "id="+result.id;
 
             if(result.role == 'Étudiant'){
                 window.location.href = "http://localhost:2000/accueilEtudiant";

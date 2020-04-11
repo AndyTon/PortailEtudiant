@@ -149,7 +149,7 @@ function save(){
 
     //get Énoncé
     var enonce = document.getElementById('enonce').innerText;
-
+    enonce = `${titre}>${enonce}`
     //get Questions
     var questions = document.getElementById('questionSection').children;
 
@@ -187,23 +187,23 @@ function save(){
         questionsList.push(stringified);
     }
 
-    var objToBeSent = {titre: titre, enonce: enonce, questions: questionsList};
+    var objToBeSent = {enonce: enonce, questions: questionsList};
     var jsonObjToBeSent = JSON.stringify(objToBeSent);
 
     fetch('http://localhost:4000/exercice/saveExercise', {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'lastName': getLastNameFromCookies(),
-            'firstName': getFirstNameFromCookies(),
-            'email': getEmailFromCookies(),
-            'role': getRoleFromCookies()
+            'email': getEmailFromCookies()
           },
           
         method: 'POST',
         body: jsonObjToBeSent
     }).then((response) => {
-        console.log(response);
+        if(response.ok){
+            window.location.href = "http://localhost:2000/accueilProf";
+        }
+        //to do gérer erreur
     })
 }
 
@@ -229,4 +229,12 @@ function addMultipleChoiceOption(button){
         radioForm.appendChild(radioLabel);
 
     generalDiv.insertBefore(radioForm, button);
+}
+
+function toAccueil(){
+    window.location.href = "http://localhost:2000/accueilProf";
+}
+
+function back(){
+    window.location.href = "http://localhost:2000/accueilProf";
 }

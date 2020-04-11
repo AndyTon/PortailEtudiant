@@ -1,4 +1,4 @@
-#exerciceCard{
+.exerciceCard{
     cursor: pointer;
     background-color: lightgray;
     margin: 10px;
@@ -8,6 +8,10 @@
     border-style: solid;
 }
 
-#exerciceCard:hover{
+.exerciceCard:hover{
     background-color: gray;
+}
+
+.hiddenId{
+    display: none;
 }
